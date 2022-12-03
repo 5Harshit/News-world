@@ -1,0 +1,93 @@
+body
+{
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+}
+.header
+{
+  position: absolute;
+  top: 10%;
+  left: 155%;
+  width: 100%;
+  transform: translate(-5%, -5%);
+  font-family: Vibur;
+  border: 0px solid #15f4ee;
+  font-weight: 400;
+}
+.header {
+  color: #fff;
+  text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #0fa,
+      0 0 82px #0fa,
+      0 0 92px #0fa,
+      0 0 102px #0fa,
+      0 0 151px #0fa;
+}
+
+/* Additional styling */
+
+h1, h2 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+  
+h1 {
+    font-size: 5.1rem;
+}
+  
+h2 {
+    font-size: 3.5rem;
+}
+
+.container {
+  margin-top: 30vh;
+  margin-left: 50vh;
+}
+.container
+{
+  position: absolute;
+  top: 50%;
+  left: 160%;
+  transform: translate(-5%, -5%);
+}
+.button
+{
+  position: relative;
+  text-align: center;
+  width: 350px;
+  padding: 40px;
+  font-size: 30px;
+  color: #15f4ee;
+  font-family: poppins;
+  font-weight: 400;
+  border: 5px solid #15f4ee;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  cursor: pointer;
+  border-radius: 100px;
+  transition: 0.5s;
+}
+.button:hover
+{
+  box-shadow: 0 5px 50px 0 #15f4ee inset, 0 5px 50px 0 #15f4ee,
+              0 5px 50px 0 #15f4ee inset, 0 5px 50px 0 #15f4ee;
+  text-shadow: 0 0 5px #15f4ee, 0 0 5px #15f4ee;
+}
+.footer
+{
+  position: absolute;
+  color: white;
+  background-color: DarkSalmon;
+  top: 490%;
+  left: 200%;
+  width: 400%;
+  transform: translate(-50%, -50%);
+  font-family: Vibur;
+  border: 0px solid #15f4ee;
+  font-weight: 400;
+} 

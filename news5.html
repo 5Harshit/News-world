@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+        
+    <title>Welcome To News World</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand">News World</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="news.html">Home</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" id="searchTxt" type="search" placeholder="Search" aria-label="Search">
+        
+      </form>
+    </div>
+  </div>
+</nav>
+
+    <div class="container my-3">
+        <h1>Top News of RUSSIA  <span class="badge bg-secondary">by newsworld</span></h1>
+        <hr>
+        <div class="accordion" id="newsAccordion"></div>
+    </div>
+<div class="footer" style="background-color:#AFEEEE; color:black;">
+      <br>
+      <center><p>--NEWS World--</p>
+      <p>front-end designed by SHRISHTI CHAUHAN & PRITI MAURYA</p>
+      <P>back-end programmed by HARSHIT KUMAR</P>
+      <p>under the guidance of Mr.NEERAJ DUBEY SIR</p>
+      <p>govt. polytechnic college, chopan, sonbhadra</p>
+      <p>contact us at "newsworld.360@gmail.com"</p></center>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/,bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+    <script>
+      //initialize the news api parameter
+let country = "ru";
+let apikey = "6322a8382a8346d892784641e8edb92d";
+//grab the news container
+let newsAccordions = document.getElementById("newsAccordion");
+
+//Create an ajax get request
+const xhr = new XMLHttpRequest();
+xhr.open('GET',`https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${apikey}`,true);
+
+
+//what to do when response is ready
+xhr.onload = function () {
+  if (this.status === 200) {
+    let json = JSON.parse(this.responseText);
+    let articles = json.articles;
+    console.log(articles);
+    let newsHtml = "";
+    articles.forEach(function(element, index) {
+ //console.log(element, index);
+     let news = `<div class="accordion" id="newsAccordion">
+                <div class="accordion-item">
+
+                    <h2 class="accordion-header" id="heading${index}">
+                            <b>Breaking News ${index+1}:</b>
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}"
+                            aria-expanded="true" aria-controls="collapse${index}">
+                           
+                           ${element["title"]}
+                        
+                        </button>
+                    </h2>
+                    </div>
+                    <div id="collapse${index}" class="accordion-collapse collapse" aria-labelledby="heading${index}"
+                        data-bs-parent="#newsAccordion">
+                        <div class="accordion-body">${element["content"]}. <a href="${element['url']}" target="_blank"> Read more here </a></div>
+                    </div>                        
+                </div>`;
+            newsHtml += news;
+        });
+    newsAccordions.innerHTML = newsHtml;
+  } 
+  else {
+    console.log("Some error occured");
+  }
+}
+
+xhr.send();
+ 
+let search = document.getElementById('searchTxt');
+search.addEventListener("input", function(){
+  let inputVal = search.value.toUpperCase();
+  //console.log("input event fired!!",inputVal);
+  let accSearch = document.getElementsByClassName('accordion-item');
+  Array.from(accSearch).forEach(function(element){
+    let accTxt = element.getElementsByTagName("button")[0].innerText;
+    //console.log(accTxt)
+    if(accTxt.includes(inputVal)){
+      element.style.display = "block";
+    }
+    else{
+      element.style.display = "none";
+    }
+  })
+  
+});
+    </script>
+    
+</body>
+</html>
